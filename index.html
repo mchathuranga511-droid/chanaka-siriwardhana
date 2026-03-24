@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chanaka Lakshan Portfolio</title>
+
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+body{
+    margin:0;
+    font-family:'Poppins', sans-serif;
+    color:white;
+    scroll-behavior:smooth;
+}
+
+/* BACKGROUND IMAGE */
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:url('hero.jpg') center/cover no-repeat;
+    opacity:0.95; 
+    z-index:-1;
+}
+
+/* NAVBAR */
+.nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    text-align:center;
+    padding:12px;
+    backdrop-filter:blur(8px);
+    background:rgba(0,0,0,0.6);
+    z-index:1000;
+}
+
+.nav a{
+    margin:6px;
+    padding:8px 14px;
+    text-decoration:none;
+    color:#00eaff;
+    border:1px solid #00eaff;
+    border-radius:20px;
+    transition:0.3s;
+}
+
+.nav a:hover{
+    color:black;
+    background:#00eaff;
+    box-shadow:0 0 15px #00eaff, 0 0 30px #00eaff;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:55px;
+    color:#00eaff;
+    text-shadow:0 0 10px #00eaff, 0 0 20px #00eaff;
+}
+
+.download{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 25px;
+    border-radius:30px;
+    color:#00eaff;
+    border:1px solid #00eaff;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.download:hover{
+    background:#00eaff;
+    color:black;
+    box-shadow:0 0 20px #00eaff;
+}
+
+/* SECTION */
+.section{
+    padding:70px 20px;
+    max-width:900px;
+    margin:auto;
+    animation:fade 1s ease;
+}
+
+/* PROFILE */
+.profile{
+    width:180px;
+    border-radius:50%;
+    display:block;
+    margin:auto;
+}
+
+/* SKILLS */
+.skill{
+    margin:15px 0;
+}
+
+.bar{
+    width:60%;
+    background:#333;
+    border-radius:10px;
+}
+
+.bar div{
+    height:05px;
+    border-radius:10px;
+    background:#00eaff;
+    box-shadow:0 0 10px #00eaff;
+    animation:load 15s;
+}
+
+.experience-container{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.experience-card{
+    background:rgba(0,0,0,0.5);
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 0 15px rgba(0,255,255,0.3);
+    transition:0.3s;
+}
+
+.experience-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 25px rgba(0,255,255,0.6);
+}
+
+.experience-card h3{
+    color:#00eaff;
+    margin-bottom:10px;
+}
+
+.experience-card ul{
+    list-style-type:disc;
+    margin-left:20px;
+}
+
+/* LIST */
+ul{
+    text-align:left;
+}
+
+/* GALLERY */
+.gallery{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.gallery img{
+    width:140px;
+    margin:6px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.gallery img:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 20px #00eaff;
+}
+
+/* AWARDS */
+.awards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+    gap:10px;
+}
+
+.awards img{
+    width:100%;
+    height:100px;
+    object-fit:cover;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.awards img:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 15px #00eaff;
+}
+
+/* CONTACT */
+.contact-box{
+    text-align:center;
+}
+
+.contact-box a.whatsapp{
+    display:inline-block;
+    margin-top:10px;
+    padding:10px 25px;
+    background:#25D366;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.contact-box a.whatsapp:hover{
+    background:#128C7E;
+    box-shadow:0 0 15px #25D366;
+}
+
+/* LIGHTBOX */
+.lightbox{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+    z-index:2000;
+    flex-direction:column;
+}
+
+.lightbox img{
+    max-width:80%;
+    max-height:80%;
+    animation:zoom 0.3s ease;
+}
+
+.lightbox .controls{
+    margin-top:15px;
+}
+
+.lightbox .controls button{
+    padding:10px 20px;
+    margin:0 10px;
+    background:#00eaff;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    color:black;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.lightbox .controls button:hover{
+    background:#00b8cc;
+    color:white;
+}
+
+/* ANIMATIONS */
+@keyframes fade{
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes load{
+    from{width:0;}
+}
+
+@keyframes zoom{
+    from{transform:scale(0.7);}
+    to{transform:scale(1);}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+    /* NAVBAR FIX */
+    .nav{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:6px;
+        padding:10px 5px;
+    }
+
+    .nav a{
+        font-size:12px;
+        padding:6px 10px;
+    }
+
+    /* HERO FIX */
+    .hero{
+        padding-top:80px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .download{
+        font-size:14px;
+        padding:8px 18px;
+    }
+
+    /* SECTION SPACING */
+    .section{
+        padding:50px 15px;
+    }
+
+    h2{
+        font-size:24px;
+    }
+
+    p, li{
+        font-size:15px;
+        line-height:1.6;
+    }
+
+    /* PROFILE IMAGE */
+    .profile{
+        width:130px;
+    }
+
+    /* SKILLS BAR */
+    .bar{
+        width:100%;
+    }
+
+    /* EXPERIENCE */
+    .experience-card{
+        padding:15px;
+    }
+
+    .company-logo{
+        width:100%;
+        height:auto;
+        margin-bottom:10px;
+    }
+
+    /* GALLERY */
+    .gallery img{
+        width:90px;
+    }
+
+    /* AWARDS */
+    .awards img{
+        height:80px;
+    }
+
+    /* CONTACT */
+    #contact p{
+        font-size:14px;
+    }
+
+    /* LIGHTBOX */
+    .lightbox img{
+        max-width:95%;
+    }
+}
+
+/* ===== EXTRA SMALL DEVICES ===== */
+@media(max-width:480px){
+
+    .hero h1{
+        font-size:26px;
+    }
+
+    .nav a{
+        font-size:11px;
+        padding:5px 8px;
+    }
+
+    h2{
+        font-size:20px;
+    }
+
+    p, li{
+        font-size:14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+<a href="#home">Home</a>
+<a href="#profile">Profile</a>
+<a href="#education">Education</a>
+<a href="#qualification">Qualification</a>
+<a href="#skills">Skills</a>
+<a href="#experience">Experience</a>
+<a href="#reference">Reference</a>
+<a href="#gallery">Gallery</a>
+<a href="#awards">Awards</a>
+<a href="#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home" class="hero">
+<div>
+<h1>CHANAKA LAKSHAN</h1>
+<p>Professional Bartender</p>
+<a href="Chanaka_Lakshan_CV.pdf" download class="download">Download CV</a>
+</div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile" class="section">
+<img src="profile.jpg" class="profile">
+<h2>Profile</h2>
+<p>
+Professional and enthusiastic bartender with over Five years of experience and over 6 years of experience in hospitality. 
+Winning silver medal in chef grill competition under innovative beer category. Delivering first-class service to dining patrons in busy bars. 
+Upbeat energy, confidence and poise have earned praise from employers and customers alike.
+</p>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="section">
+<h2>Education</h2>
+<ul>
+<li>G.C.E Advanced Level(Department of Examination Sri Lanka) – 2017</li>
+<li>G.C.E Ordinary Level (Department of Examination Sri Lanka) – 2014</li>
+</ul>
+</section>
+
+<!-- QUALIFICATION -->
+<section id="qualification" class="section">
+<h2>Professional Qualification</h2>
+<ul>
+<li>Italian Barista Course – Colombo Coffee Company</li>
+</ul>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+<h2>Skills</h2>
+
+<div class="skill"><p>Critical Thinking</p><div class="bar"><div style="width:75%"></div></div></div>
+<div class="skill"><p>Inventory Restocking</p><div class="bar"><div style="width:50%"></div></div></div>
+<div class="skill"><p>Mixology</p><div class="bar"><div style="width:60%"></div></div></div>
+<div class="skill"><p>Effective Communication</p><div class="bar"><div style="width:90%"></div></div></div>
+<div class="skill"><p>Innovative Cocktail Creation</p><div class="bar"><div style="width:85%"></div></div></div>
+<div class="skill"><p>Teamwork</p><div class="bar"><div style="width:95%"></div></div></div>
+<div class="skill"><p>Guest Services</p><div class="bar"><div style="width:95%"></div></div></div>
+
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+<h2>Work Experience</h2>
+
+<div class="experience-card">
+  <img src="mezo_logo.jpg" class="company-logo">
+  <div class="experience-details">
+    <h3>MEZO (PVT) LTD – Head Bartender</h3>
+    <ul>
+      <li>Provided exceptional guest service</li>
+      <li>Inventory management</li>
+      <li>Bar menu creation</li>
+      <li>Promotional events</li>
+    </ul>
+  </div>
+</div>
+
+<div class="experience-card">
+  <img src="cinnamon_logo.jpg" class="company-logo">
+  <div class="experience-details">
+    <h3>Cinnamon Bentota Beach – Bartender</h3>
+    <ul>
+      <li>Created cocktails</li>
+      <li>Customer service</li>
+      <li>Inventory handling</li>
+    </ul>
+  </div>
+</div>
+
+<div class="experience-card">
+  <img src="tacobell_logo.jpg" class="company-logo">
+  <div class="experience-details">
+    <h3>Taco Bell – Crew Member</h3>
+    <ul>
+      <li>Maintained standards</li>
+      <li>Customer service</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- REFERENCE -->
+<section id="reference" class="section" style="padding:50px 20px; max-width:900px; margin:auto; animation:fade 1s ease;">
+  <h2 style="text-align:center; font-size:35px; color:#00eaff; margin-bottom:30px; text-shadow:0 0 10px #00eaff;">References</h2>
+
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
+
+    <div style="background:rgba(0,0,0,0.6); padding:20px; border-radius:15px; min-width:250px; box-shadow:0 0 15px #00eaff; flex:1; max-width:400px;">
+      <h3 style="color:#00eaff; margin-bottom:10px;">Maleeka Gamage</h3>
+      <p style="margin:5px 0;">💼 Food & Beverage Manager – The Blue Water Hotel & Spa</p>
+      <p style="margin:5px 0;">🌍 Sri Lanka</p>
+      <p style="margin:5px 0;">📞 <a href="tel:+94713865428" style="color:#00eaff; text-decoration:none;">+94 71 386 5428</a></p>
+      
+    </div>
+
+    <div style="background:rgba(0,0,0,0.6); padding:20px; border-radius:15px; min-width:250px; box-shadow:0 0 15px #00eaff; flex:1; max-width:400px;">
+      <h3 style="color:#00eaff; margin-bottom:10px;">Halud Ranasinghe</h3>
+      <p style="margin:5px 0;">💼 General Manager – Braira Hotels & Resorts</p>
+      <p style="margin:5px 0;">🌍 Saudi Arabia</p>
+      <p style="margin:5px 0;">📞 <a href="tel:+94776803625" style="color:#00eaff; text-decoration:none;">+94 77 680 3625</a></p>
+      <p style="margin:5px 0;">📧 <a href="mailto:ranasinghehalud@gmail.com" style="color:#00eaff; text-decoration:none;">ranasinghehalud@gmail.com</a></p>
+    </div>
+</div>
+
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="section">
+<h2>Gallery</h2>
+<div class="gallery">
+<img src="image1.jpg" onclick="openLightbox(this)">
+<img src="image2.jpg" onclick="openLightbox(this)">
+<img src="image3.jpg" onclick="openLightbox(this)">
+<img src="image4.jpg" onclick="openLightbox(this)">
+<img src="image5.jpg" onclick="openLightbox(this)">
+</div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards" class="section">
+<h2>Awards & Achievements</h2>
+<div class="awards">
+<img src="award1.jpg" onclick="openLightbox(this)">
+<img src="award2.jpg" onclick="openLightbox(this)">
+<img src="award3.jpg" onclick="openLightbox(this)">
+<img src="award4.jpg" onclick="openLightbox(this)">
+<img src="award5.jpg" onclick="openLightbox(this)">
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section" style="padding:30px 15px; max-width:600px; margin:auto; animation:fade 1s ease;">
+  <div style="background:rgba(0,0,0,0.6); padding:20px; border-radius:20px; text-align:center; box-shadow:0 0 15px #00eaff;">
+    <h2 style="color:#00eaff; font-size:28px; margin-bottom:15px; text-shadow:0 0 8px #00eaff;">Contact</h2>
+
+    <p style="margin:8px 0;">📞 <a href="tel:+94752125724" style="color:#00eaff; text-decoration:none;">+94 7521 25724</a></p>
+    <p style="margin:8px 0;">📧 <a href="mailto:chanakalakshan544@gmail.com" style="color:#00eaff; text-decoration:none;">chanakalakshan544@gmail.com</a></p>
+    <p style="margin:8px 0;">📍 Kandy, Sri Lanka</p>
+
+    <a href="https://wa.me/94752125724" target="_blank" 
+       style="display:inline-flex; align-items:center; justify-content:center; gap:8px; background:#25D366; color:white; text-decoration:none; padding:8px 15px; border-radius:50px; font-weight:bold; margin-top:15px; box-shadow:0 0 12px #25D366; transition:0.3s;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:20px; height:20px;">
+      💬 Chat on WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+<span onclick="closeLightbox()" style="position:absolute;top:20px;right:30px;font-size:30px;">✖</span>
+<img id="lightImg">
+<div class="controls">
+<button onclick="prev()">◀</button>
+<button onclick="next()">▶</button>
+</div>
+</div>
+
+<script>
+let imgs=document.querySelectorAll('.gallery img,.awards img');
+let index=0;
+
+function openLightbox(img){
+ document.getElementById("lightbox").style.display="flex";
+ document.getElementById("lightImg").src=img.src;
+ index=[...imgs].indexOf(img);
+}
+function closeLightbox(){
+ document.getElementById("lightbox").style.display="none";
+}
+function next(){
+ index=(index+1)%imgs.length;
+ lightImg.src=imgs[index].src;
+}
+function prev(){
+ index=(index-1+imgs.length)%imgs.length;
+ lightImg.src=imgs[index].src;
+}
+</script>
+
+</body>
+</html>
